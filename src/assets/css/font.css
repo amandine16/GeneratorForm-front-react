@@ -1,0 +1,85 @@
+@font-face {
+  font-family: "Averta italic";
+  src: url("../fonts/AvertaDemo-ExtraBoldItalic.eot");
+  src: url("../fonts/AvertaDemo-ExtraBoldItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/AvertaDemo-ExtraBoldItalic.woff2") format("woff2"),
+    url("../fonts/AvertaDemo-ExtraBoldItalic.woff") format("woff"),
+    url("../fonts/AvertaDemo-ExtraBoldItalic.ttf") format("truetype"),
+    url("../fonts/AvertaDemo-ExtraBoldItalic.svg#AvertaDemo-ExtraBoldItalic")
+      format("svg");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Averta";
+  src: url("../fonts/AvertaDemo-Regular.eot");
+  src: url("../fonts/AvertaDemo-Regular.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/AvertaDemo-Regular.woff2") format("woff2"),
+    url("../fonts/AvertaDemo-Regular.woff") format("woff"),
+    url("../fonts/AvertaDemo-Regular.ttf") format("truetype"),
+    url("../fonts/AvertaDemo-Regular.svg#AvertaDemo-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* HELVETICA */
+
+@font-face {
+  font-family: "helvetica";
+  src: url("../fonts/helvetica/FreeSansBold.eot");
+  src: url("../fonts/helvetica/FreeSansBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/helvetica/FreeSansBold.woff2") format("woff2"),
+    url("../fonts/helvetica/FreeSansBold.woff") format("woff"),
+    url("../fonts/helvetica/FreeSansBold.ttf") format("truetype"),
+    url("../fonts/helvetica/FreeSansBold.svg#FreeSansBold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pragmatica";
+  src: url("../fonts/helvetica/Pragmatica-Medium.eot");
+  src: url("../fonts/helvetica/Pragmatica-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/helvetica/Pragmatica-Medium.woff2") format("woff2"),
+    url("../fonts/helvetica/Pragmatica-Medium.woff") format("woff"),
+    url("../fonts/helvetica/Pragmatica-Medium.ttf") format("truetype"),
+    url("../fonts/helvetica/Pragmatica-Medium.svg#Pragmatica-Medium")
+      format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("../fonts/helvetica/FreeSans.eot");
+  src: url("../fonts/helvetica/FreeSans.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/helvetica/FreeSans.woff2") format("woff2"),
+    url("../fonts/helvetica/FreeSans.woff") format("woff"),
+    url("../fonts/helvetica/FreeSans.ttf") format("truetype"),
+    url("../fonts/helvetica/FreeSans.svg#FreeSans") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Warownia";
+  src: url("../fonts/helvetica/WarowniaUlt.eot");
+  src: url("../fonts/helvetica/WarowniaUlt.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/helvetica/WarowniaUlt.woff2") format("woff2"),
+    url("../fonts/helvetica/WarowniaUlt.woff") format("woff"),
+    url("../fonts/helvetica/WarowniaUlt.ttf") format("truetype"),
+    url("../fonts/helvetica/WarowniaUlt.svg#WarowniaUlt") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
