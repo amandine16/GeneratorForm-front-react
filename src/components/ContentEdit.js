@@ -8,11 +8,17 @@ import TypeQuestion from "../components/TypeQuestion";
 import axios from "axios";
 import ButtonValid from "./buttonValid";
 
-const ContentEdit = ({ idForm, questions, setQuestions }) => {
+const ContentEdit = ({
+  idForm,
+  questions,
+  setQuestions,
+  setSuccessMessage,
+  setErrorMessage,
+}) => {
   console.log(questions);
   const [switchEdit, setSwitchEdit] = useState(true);
   const [question, setQuestion] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+
   // Function to switch from question to answer
   const switchEdition = (type) => {
     type === "answer" ? setSwitchEdit(false) : setSwitchEdit(true);
@@ -53,9 +59,10 @@ const ContentEdit = ({ idForm, questions, setQuestions }) => {
         `https://tell-me-more-server.herokuapp.com/form/update/${idForm}`,
         { questions: questions }
       );
-      console.log(response);
+      setSuccessMessage("Vos questions ont bien été sauvegardées !");
     } catch (error) {
       console.log(error.response.data);
+      setErrorMessage("Erreur, veuillez réessayer");
     }
   };
 

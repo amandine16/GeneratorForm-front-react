@@ -456,13 +456,117 @@ h1 {
     font-style: italic;
   }
 }
-
+.form {
+  margin: 20px;
+}
+.back {
+  margin-top: 10px;
+}
 .content-form {
+  margin-top: 20px;
   display: flex;
   background-color: $greenClair;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  border-radius: 15px;
   min-height: 75vh;
   padding: 35px;
+  .intro {
+    font-family: "Averta";
+    height: 200px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    > div:first-child {
+      font-size: 18px;
+      font-weight: 400;
+      color: $greenFonce;
+    }
+    > div:nth-child(2) {
+      font-size: 36px;
+      color: $greenDark;
+    }
+    > div:nth-child(3) {
+      font-size: 24px;
+      font-weight: 700;
+      color: $greenFonce;
+    }
+  }
+}
+.content-question {
+  margin-top: 20px;
+  background-color: #eaf9ec;
+  border-radius: 15px;
+  min-height: 80vh;
+  padding: 35px;
+  font-family: "Averta";
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+
+  .numQst {
+    font-size: 16px;
+    font-weight: 400;
+    color: $greenFonce;
+    margin-bottom: 10px;
+  }
+  .title {
+    font-size: 36px;
+    color: $greenDark;
+    margin-bottom: 35px;
+  }
+  .textarea {
+    width: 700px;
+    height: 200px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    border-style: none;
+    padding: 20px;
+    font-family: "Averta";
+    background-color: white;
+  }
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 50px 0;
+  }
+  .btnQst {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.listeNote {
+  display: flex;
+  .note {
+    border: 1px solid $greenFonce;
+    padding: 25px;
+  }
+}
+.next,
+.previous {
+  width: 120px;
+  height: 50px;
+}
+.next {
+  cursor: pointer;
+  background-color: $greenNormal;
+  color: white;
+  border-radius: 5px;
+}
+.previous {
+  cursor: pointer;
+  color: $greenNormal;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    margin-right: 10px;
+  }
 }

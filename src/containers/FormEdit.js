@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
-import { useLocation, useHistory, useParams } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
-import { ReactComponent as ChevronLeft } from "../assets/icons/feather/chevron-left.svg";
 import { ReactComponent as Check } from "../assets/icons/feather/check.svg";
 import ModalError from "../components/ModalError";
 import ButtonAnswer from "../components/ButtonAnswer";
@@ -117,6 +116,15 @@ const FormEdit = ({ setReload, reload }) => {
       }
     }
   };
+
+  const answer = () => {
+    questions.length !== 0
+      ? history.push(`/forms/${idForm}`)
+      : setErrorMessage(
+          "Vous devez d'abord entrez des questions pour accèder au formulaire"
+        );
+  };
+
   return isLoading ? (
     <span>En attente</span>
   ) : (
@@ -146,10 +154,7 @@ const FormEdit = ({ setReload, reload }) => {
             <div className="deleteForm buttonDelete" onClick={deleteForm}>
               <Trash />
             </div>
-            <div
-              className="answerForm"
-              onClick={() => history.push(`/forms/${idForm}`)}
-            >
+            <div className="answerForm" onClick={answer}>
               <ButtonAnswer />
             </div>
           </div>
@@ -158,6 +163,8 @@ const FormEdit = ({ setReload, reload }) => {
         {/* Content edit ----> Questions */}
         <div className="contentEdit">
           <ContentEdit
+            setErrorMessage={setErrorMessage}
+            setSuccessMessage={setSuccessMessage}
             idForm={idForm}
             title={title}
             questions={questions}
