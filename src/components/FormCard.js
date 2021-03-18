@@ -1,9 +1,9 @@
 // import { useState } from "react";
-import IconPlusSvg from "../assets/icons/IconPlusSvg";
+import { ReactComponent as Plus } from "../assets/icons/feather/plus.svg";
 import ButtonAnswer from "../components/ButtonAnswer";
 import ButtonEdit from "../components/ButtonEdit";
 
-const FormCard = ({ title, empty, setModal, modal }) => {
+const FormCard = ({ title, empty, setModal, modal, idForm }) => {
   const openModal = () => {
     // open modal
     setModal(true);
@@ -14,7 +14,7 @@ const FormCard = ({ title, empty, setModal, modal }) => {
       {empty ? (
         <div className="cardAddForm" onClick={openModal}>
           <div>
-            <IconPlusSvg color={"white"} width={35} height={35} />
+            <Plus color={"white"} width={35} height={35} />
             <p>Nouveau formulaire</p>
           </div>
         </div>
@@ -24,10 +24,10 @@ const FormCard = ({ title, empty, setModal, modal }) => {
           <p className="titleCard">{title}</p>
           <div className="btnCardForm">
             <div>
-              <ButtonEdit />
+              <ButtonEdit idForm={idForm} />
             </div>
             <div>
-              <ButtonAnswer />
+              <ButtonAnswer idForm={idForm} />
             </div>
           </div>
         </div>

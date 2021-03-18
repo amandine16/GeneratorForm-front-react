@@ -6,7 +6,7 @@ $greenDark: #0e401c;
 $yellow: #f5ba49;
 $pinkClair: #f09f97;
 $corail: #ff7b6f;
-$grey: "#E5E5E5";
+$grey: #e5e5e5;
 
 * {
   padding: 0;
@@ -53,11 +53,26 @@ h1 {
 }
 
 .typeQuestion {
+  cursor: pointer;
   border-radius: 5px;
-  border: 1px $greenNormal;
+  border: 1px solid $greenNormal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 350px;
+  color: $greenNormal;
+  font-size: 18px;
+  svg {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .buttonAnswer {
+  cursor: pointer;
+  font-family: "Averta";
   background-color: $greenNormal;
   color: white;
   display: flex;
@@ -66,16 +81,94 @@ h1 {
   font-size: 14px;
   padding: 10px;
   border-radius: 5px;
+  height: 100%;
 }
 .buttonEdit {
+  cursor: pointer;
   color: $greenNormal;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.buttonDelete {
+  cursor: pointer;
+  width: 40px;
+  height: 100%;
+  border: 1px solid $corail;
+  border-radius: 5px;
+  color: $corail;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: "Averta";
+  font-size: 18px;
+  color: $greenDark;
+  font-weight: 700;
+  span {
+    margin-left: 10px;
+  }
+}
+
+.check {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border: 1px solid $greenNormal;
+  border-radius: 5px;
+  color: $greenNormal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back {
+  cursor: pointer;
+}
+
+.buttonSave {
+  font-family: "Averta";
+  cursor: pointer;
+  background-color: $greenNormal;
+  color: white;
+  width: 140px;
+  height: 50px;
+  border-radius: 5px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.textQst,
+.noteQst {
+  width: 73px;
+  height: 100%;
+  background-color: $pinkClair;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  svg {
+    width: 18px;
+  }
+}
+.textQst {
+  background-color: $yellow;
+}
+
 // MODAL
-.modalAddForm {
+.modalAddForm,
+.modalError,
+.modalSuccess {
   display: flex;
   height: 100vh;
   width: 100vw;
@@ -137,6 +230,8 @@ h1 {
 // CONTAINERS
 // Forms
 .Forms {
+  margin-top: 40px;
+  margin-bottom: 40px;
   .allFormsCard {
     display: flex;
     flex-wrap: wrap;
@@ -213,11 +308,161 @@ h1 {
   .formCards {
     font-family: "Averta";
     margin: 25px 25px 0 0;
-    // display: flex;
-    // justify-content: space-between;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // flex-direction: column;
   }
+}
+
+// EDITFORM
+.topEdit {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .inputTitleForm {
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      ::placeholder {
+        color: $grey;
+        font-weight: 700;
+      }
+      input {
+        font-family: "Averta";
+        font-size: 24px;
+        text-align: center;
+        border-radius: 5px;
+        outline: none;
+        border: 0.5px solid $grey;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $greenDark;
+        font-weight: 700;
+        margin-right: 10px;
+      }
+    }
+    .titleError {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+  .btnTopEdit {
+    display: flex;
+    align-items: center;
+    .answerForm {
+      height: 40px;
+    }
+    .deleteForm {
+      height: 40px;
+      margin-right: 10px;
+    }
+  }
+}
+// CONTENT EDIT
+.ContentEdit {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 20px;
+  background-color: $greenClair;
+  font-family: "Averta";
+  border-radius: 15px;
+  padding: 25px;
+  .top {
+    display: flex;
+    align-items: center;
+    font-family: "Averta";
+    font-size: 24px;
+    color: $greenDark;
+    font-weight: 700;
+    margin-top: 10px;
+
+    :first-child {
+      margin-right: 50px;
+    }
+    .switchQuestion,
+    .switchAnswer {
+      padding-bottom: 5px;
+      cursor: pointer;
+    }
+    .line {
+      padding-bottom: 3px;
+      border-bottom: 2px solid $greenDark;
+    }
+    .inactive {
+      color: $greenNormal;
+    }
+  }
+  .formEditQst {
+    margin: 50px 0;
+  }
+  .oneQst {
+    display: flex;
+    align-items: center;
+    height: 37px;
+    margin-bottom: 35px;
+    div {
+      margin-right: 10px;
+    }
+    .logoTypeQst {
+      height: 100%;
+    }
+    .inputQst {
+      height: 100%;
+      width: 100%;
+      input {
+        height: 100%;
+        border-radius: 5px;
+        padding: 5px 10px;
+        border: none;
+        width: 100%;
+      }
+    }
+  }
+  .rankMoinsQst,
+  .rankPlusQst,
+  .trashQst {
+    cursor: pointer;
+    background-color: white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $greenDark;
+    width: 37px;
+    border-radius: 5px;
+  }
+  .trashQst {
+    color: $corail;
+  }
+  .btnTypeNewQst {
+    display: flex;
+    :first-child {
+      margin-right: 10px;
+    }
+  }
+  .btnSave {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 50px;
+  }
+  .noQuestion {
+    color: $greenDark;
+    font-weight: 700;
+    font-style: italic;
+  }
+}
+
+.content-form {
+  display: flex;
+  background-color: $greenClair;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 75vh;
+  padding: 35px;
 }

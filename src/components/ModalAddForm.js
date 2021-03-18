@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import ButtonAnswer from "../components/ButtonAnswer";
+import { useHistory } from "react-router";
+import { ReactComponent as Xcircle } from "../assets/icons/feather/x-circle.svg";
 
 const ModalAddForm = ({ setModal, setForms, reload, setReload }) => {
   const [title, setTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const history = useHistory();
   //   Function for value title
   const handleTitle = (e) => {
     setTitle(e.target.value);
@@ -20,12 +21,15 @@ const ModalAddForm = ({ setModal, setForms, reload, setReload }) => {
       try {
         const response = await axios.post(
           "https://tell-me-more-server.herokuapp.com/form/create",
-          { title: title }
+          { title: title, questions: [] }
         );
         if (response.data) {
-          console.log(response.data);
+          console.log(response.data._id);
           setReload(!reload);
           setModal(false);
+          history.push(`/forms/${response.data._id}/edit`, {
+            idForm: response.data._id,
+          });
         }
       } catch (error) {
         console.log(error.response.data);
@@ -44,8 +48,7 @@ const ModalAddForm = ({ setModal, setForms, reload, setReload }) => {
       <div className="modal-content">
         <div className="header-modal">
           <span>Ajouter un formulaire</span>
-          <FontAwesomeIcon
-            icon="times-circle"
+          <Xcircle
             onClick={() => {
               setModal(false);
               setErrorMessage("");

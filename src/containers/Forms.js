@@ -43,7 +43,7 @@ const Forms = ({ forms, setForms, reload, setReload }) => {
           <FormCard empty={true} setModal={setModal} modal={modal} />
           {/* My forms */}
           {forms.map((form, index) => {
-            return <FormCard title={form.title} />;
+            return <FormCard title={form.title} idForm={form._id} />;
           })}
         </div>
       </div>
