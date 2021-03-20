@@ -85,7 +85,7 @@ const Form = () => {
           }
           // Add question and answer in Answer
           const response2 = await axios.post(
-            `http://localhost:3001/answer/update/${idAnswer}`,
+            `https://tell-me-more-server.herokuapp.com/answer/update/${idAnswer}`,
             { questionsAndAnswers: newAnswers }
           );
           if (response2.data) {
