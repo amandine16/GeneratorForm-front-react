@@ -14,10 +14,28 @@ const ContentEdit = ({
   setQuestions,
   setSuccessMessage,
   setErrorMessage,
+  answers,
 }) => {
   const [switchEdit, setSwitchEdit] = useState(true);
   const [question, setQuestion] = useState("");
-
+  let tab = [];
+  console.log(answers);
+  if (answers.questionsAndAnswers.length !== 0) {
+    for (let i = 0; i < answers.questionsAndAnswers[0].answer.length; i++) {
+      for (let y = 0; y < answers.questionsAndAnswers.length; y++) {
+        tab.push({
+          q: answers.questionsAndAnswers[y].question,
+          type: answers.questionsAndAnswers[y].type,
+          rep: answers.questionsAndAnswers[y].answer[i],
+          rank: y + 1,
+          // last allows to determine if we display borderBottom
+          last: y === answers.questionsAndAnswers.length - 1 ? true : false,
+        });
+      }
+    }
+    console.log(tab);
+  }
+  let tabNote = [1, 2, 3, 4, 5];
   // Function to switch from question to answer
   const switchEdition = (type) => {
     type === "answer" ? setSwitchEdit(false) : setSwitchEdit(true);
@@ -173,24 +191,75 @@ const ContentEdit = ({
               question texte ou note !
             </span>
           )}
+          {/* Button Type new Question */}
+          <div className="btnTypeNewQst">
+            <div className="btnAddQstText" onClick={() => addQst("text")}>
+              <TypeQuestion type={"Texte"} />
+            </div>
+            <div className="btnAddQstNote" onClick={() => addQst("note")}>
+              <TypeQuestion type={"Note"} />
+            </div>
+          </div>
+          {/* Btn save */}
+          <div className="btnSave" onClick={saveQst}>
+            <ButtonValid text={"Sauvegarder"} />
+          </div>
         </div>
       ) : (
-        <div className="answer">voir réponses</div>
-      )}
+        <div className="answer">
+          {tab.map((elem, index) => {
+            return (
+              <div
+                key={index}
+                className="oneAnswer"
+                style={{ borderBottom: elem.last && "1px solid #62c188" }}
+              >
+                {console.log(elem)}
+                <div
+                  className="logoTypeQst"
+                  style={{
+                    display: "flex",
 
-      {/* Button Type new Question */}
-      <div className="btnTypeNewQst">
-        <div className="btnAddQstText" onClick={() => addQst("text")}>
-          <TypeQuestion type={"Texte"} />
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  {elem.type === "text" ? (
+                    <TextQst rank={elem.rank} />
+                  ) : (
+                    <NoteQst rank={elem.rank} />
+                  )}
+                  <p className="titleQuestion">{elem.q}</p>
+                </div>
+
+                {elem.type === "text" ? (
+                  <p className="rep">{elem.rep}</p>
+                ) : (
+                  <div className="listeNote">
+                    {tabNote.map((num, i) => {
+                      return (
+                        <div
+                          key={i}
+                          className="note"
+                          style={{
+                            backgroundColor:
+                              num === Number(elem.rep) && "#f09f97",
+                            borderTopLeftRadius: num === 1 && "15px",
+                            borderBottomLeftRadius: num === 1 && "15px",
+                            borderTopRightRadius: num === 5 && "15px",
+                            borderBottomRightRadius: num === 5 && "15px",
+                          }}
+                        >
+                          {num}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
-        <div className="btnAddQstNote" onClick={() => addQst("note")}>
-          <TypeQuestion type={"Note"} />
-        </div>
-      </div>
-      {/* Btn save */}
-      <div className="btnSave" onClick={saveQst}>
-        <ButtonValid text={"Sauvegarder"} />
-      </div>
+      )}
     </div>
   );
 };

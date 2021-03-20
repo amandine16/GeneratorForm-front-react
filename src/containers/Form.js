@@ -13,6 +13,7 @@ const Form = () => {
   const [questionsAnswer, setQuestionsAnswer] = useState([]);
   const [answers, setAnswers] = useState();
   const [idAnswer, setIdAnswer] = useState();
+  console.log(page);
 
   let tabNote = [1, 2, 3, 4, 5];
 
@@ -51,17 +52,23 @@ const Form = () => {
     // if state questionAnswer is no empty, is that i want to answer the questions
     if (questionsAnswer.length !== 0) {
       // Add all question (in table form)
+      console.log(data.questions);
       let newQuestionsAnswer = [...data.questions];
       // add answer in array answer of this question
       newQuestionsAnswer[page - 1].answer.push(questionsAnswer);
 
       // Add all question (in table answer)
       let newAnswers = [...answers];
+      console.log(newAnswers);
       if (answers.length === 0) {
         // Add all question
         newAnswers = [...data.questions];
         // si j'enlève l'ajout des réponses dans le formulaire, je remettrai cette ligne ci-dessous
         // newAnswers[page - 1].answer.push(questionsAnswer);
+        console.log(answers.length);
+        console.log(data.questions.length);
+      } else if (answers.length < data.questions.length) {
+        newAnswers = [...data.questions];
       } else {
         newAnswers[page - 1].answer.push(questionsAnswer);
       }

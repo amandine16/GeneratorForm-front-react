@@ -19,6 +19,8 @@ const FormEdit = ({ setReload, reload }) => {
   const [form, setForm] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [displayCheck, setDisplayCheck] = useState(false);
+  const [answers, setAnswers] = useState();
+  console.log(answers);
   //   recovery of id form
   const location = useLocation();
   const history = useHistory();
@@ -38,10 +40,13 @@ const FormEdit = ({ setReload, reload }) => {
           const response = await axios.get(
             `https://tell-me-more-server.herokuapp.com/form/${idForm}`
           );
-
-          if (response.data) {
+          const response2 = await axios.get(
+            `https://tell-me-more-server.herokuapp.com/answers/${idForm}`
+          );
+          if (response.data && response2.data) {
             setTitle(response.data.title);
             setQuestions(response.data.questions);
+            setAnswers(response2.data[0]);
             setIsLoading(false);
           }
         } catch (error) {
@@ -159,6 +164,7 @@ const FormEdit = ({ setReload, reload }) => {
             title={title}
             questions={questions}
             setQuestions={setQuestions}
+            answers={answers}
           />
         </div>
       </div>
