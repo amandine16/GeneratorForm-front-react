@@ -15,7 +15,6 @@ const ContentEdit = ({
   setSuccessMessage,
   setErrorMessage,
 }) => {
-  console.log(questions);
   const [switchEdit, setSwitchEdit] = useState(true);
   const [question, setQuestion] = useState("");
 
@@ -42,11 +41,13 @@ const ContentEdit = ({
       question = {
         question: "",
         type: "text",
+        answer: [],
       };
     } else {
       question = {
         question: "",
         type: "note",
+        answer: [],
       };
     }
     newListQst.push(question);
@@ -59,7 +60,9 @@ const ContentEdit = ({
         `https://tell-me-more-server.herokuapp.com/form/update/${idForm}`,
         { questions: questions }
       );
-      setSuccessMessage("Vos questions ont bien été sauvegardées !");
+      if (response.data) {
+        setSuccessMessage("Vos questions ont bien été sauvegardées !");
+      }
     } catch (error) {
       console.log(error.response.data);
       setErrorMessage("Erreur, veuillez réessayer");
@@ -71,7 +74,7 @@ const ContentEdit = ({
     newQuestions.splice(index, 1);
     setQuestions(newQuestions);
   };
-  // modify order question
+  // modify order question +
   const upOrder = (index) => {
     if (index > 0) {
       const newQuestions = [...questions];
@@ -85,7 +88,7 @@ const ContentEdit = ({
     }
   };
 
-  // modify order question
+  // modify order question -
   const downOrder = (index) => {
     if (index < questions.length - 1) {
       const newQuestions = [...questions];

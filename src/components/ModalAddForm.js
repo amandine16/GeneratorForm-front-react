@@ -21,16 +21,22 @@ const ModalAddForm = ({ setModal, setForms, reload, setReload }) => {
       try {
         const response = await axios.post(
           "https://tell-me-more-server.herokuapp.com/form/create",
-          { title: title, questions: [] }
+          { title: title, questions: [], answers: [] }
         );
         if (response.data) {
-          console.log(response.data._id);
           setReload(!reload);
           setModal(false);
           history.push(`/forms/${response.data._id}/edit`, {
             idForm: response.data._id,
           });
         }
+
+        // Création d'un tableau qstAndArep à vide à la création du formulaire, dans la table Answer
+        const response2 = await axios.post(
+          `https://tell-me-more-server.herokuapp.com/answer/create`,
+          // `http://localhost:3001/answer/create`,
+          { idForm: response.data._id, questionsAndAnswers: [] }
+        );
       } catch (error) {
         console.log(error.response.data);
         if (

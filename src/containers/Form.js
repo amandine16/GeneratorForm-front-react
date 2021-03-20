@@ -10,40 +10,108 @@ const Form = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
+  const [questionsAnswer, setQuestionsAnswer] = useState([]);
+  const [answers, setAnswers] = useState();
+  const [idAnswer, setIdAnswer] = useState();
+
   let tabNote = [1, 2, 3, 4, 5];
 
-  //   console.log(data);
-
-  // get all info on form
+  // get all info on form , and info of answer
   useEffect(() => {
     const getInfoForm = async () => {
       try {
         const response = await axios.get(
           `https://tell-me-more-server.herokuapp.com/form/${id}`
         );
-
+        const response2 = await axios.get(
+          `https://tell-me-more-server.herokuapp.com/answers/${id}`
+        );
         if (response.data) {
           setData(response.data);
+          console.log(response.data.questions);
           setIsLoading(false);
         }
+        if (response2.data) {
+          setAnswers(response2.data[0].questionsAndAnswers);
+          setIdAnswer(response2.data[0]._id);
+        }
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
       }
     };
     getInfoForm();
   }, [id]);
 
   const start = () => {
+    // if start quizz for the first time, i go the first question
     if (page < data.questions.length) {
       let newPage = page + 1;
       setPage(newPage);
     }
+    // if state questionAnswer is no empty, is that i want to answer the questions
+    if (questionsAnswer.length !== 0) {
+      // Add all question (in table form)
+      let newQuestionsAnswer = [...data.questions];
+      // add answer in array answer of this question
+      newQuestionsAnswer[page - 1].answer.push(questionsAnswer);
+
+      // Add all question (in table answer)
+      let newAnswers = [...answers];
+      if (answers.length === 0) {
+        // Add all question
+        newAnswers = [...data.questions];
+        // si j'enlève l'ajout des réponses dans le formulaire, je remettrai cette ligne ci-dessous
+        // newAnswers[page - 1].answer.push(questionsAnswer);
+      } else {
+        newAnswers[page - 1].answer.push(questionsAnswer);
+      }
+
+      const saveQstAnswer = async () => {
+        try {
+          // Add question and answer in Form
+          const response = await axios.post(
+            `https://tell-me-more-server.herokuapp.com/form/update/${id}`,
+            { questions: newQuestionsAnswer }
+          );
+          if (response.data) {
+            // setSuccessMessage("Vos réponses ont bien été sauvegardées !");
+          }
+          // Add question and answer in Answer
+          const response2 = await axios.post(
+            `http://localhost:3001/answer/update/${idAnswer}`,
+            { questionsAndAnswers: newAnswers }
+          );
+          if (response2.data) {
+            // Update state with all question and new answer
+            setAnswers(response2.data.questionsAndAnswers);
+          }
+        } catch (error) {
+          console.log(error);
+          // setErrorMessage("Erreur, veuillez réessayer");
+        }
+      };
+      saveQstAnswer();
+    }
+    // If this the end of the quizz
+    if (page >= data.questions.length) {
+      let newPage = page + 1;
+      setPage(newPage);
+    }
   };
+  // Function for go to previous page
   const previous = () => {
     if (page !== 0) {
       let newPage = page - 1;
       setPage(newPage);
     }
+  };
+
+  // I get the answer, and add it to my questionsAnswer array
+  const textAnswer = (event, type, numQst) => {
+    setQuestionsAnswer(event.target.value);
+  };
+  const noteAnswer = (note, type, numQst) => {
+    setQuestionsAnswer(note);
   };
 
   return isLoading ? (
@@ -68,42 +136,43 @@ const Form = () => {
         </>
       ) : (
         <div className="content-question">
+          {page > data.questions.length && <span>Terminer</span>}
           {data.questions.map((elem, index) => {
             return (
-              <>
+              <div key={index}>
                 {page === index + 1 && (
                   <>
                     <div className="content">
-                      {console.log(page)}
-                      {console.log(index + 1)}
                       <div className="numQst">QUESTION {index + 1}</div>
                       <div className="title">{elem.question}</div>
                       <div className="answer">
                         {elem.type === "text" ? (
                           <textarea
+                            onChange={(e) => textAnswer(e, "text", index)}
                             placeholder="Répondez ici ..."
                             className="textarea"
                           ></textarea>
                         ) : (
                           <div className="listeNote">
-                            {tabNote.map((elem, index) => {
+                            {tabNote.map((elem, i) => {
                               return (
-                                <>
-                                  <div
-                                    className="note"
-                                    style={{
-                                      borderTopLeftRadius: elem === 1 && "15px",
-                                      borderBottomLeftRadius:
-                                        elem === 1 && "15px",
-                                      borderTopRightRadius:
-                                        elem === 5 && "15px",
-                                      borderBottomRightRadius:
-                                        elem === 5 && "15px",
-                                    }}
-                                  >
-                                    {elem}
-                                  </div>
-                                </>
+                                <div
+                                  key={i}
+                                  onClick={() =>
+                                    noteAnswer(elem, "note", index)
+                                  }
+                                  className="note"
+                                  style={{
+                                    borderTopLeftRadius: elem === 1 && "15px",
+                                    borderBottomLeftRadius:
+                                      elem === 1 && "15px",
+                                    borderTopRightRadius: elem === 5 && "15px",
+                                    borderBottomRightRadius:
+                                      elem === 5 && "15px",
+                                  }}
+                                >
+                                  {elem}
+                                </div>
                               );
                             })}
                           </div>
@@ -116,15 +185,15 @@ const Form = () => {
                         <ArrowLeft />
                         Précedent
                       </button>
-                      {page !== data.questions.length && (
-                        <button className="next" onClick={start}>
-                          Suivant
-                        </button>
-                      )}
+                      {/* {page !== data.questions.length && ( */}
+                      <button className="next" onClick={start}>
+                        Suivant
+                      </button>
+                      {/* )} */}
                     </div>
                   </>
                 )}
-              </>
+              </div>
             );
           })}
         </div>

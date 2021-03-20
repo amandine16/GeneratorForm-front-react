@@ -25,7 +25,6 @@ const FormEdit = ({ setReload, reload }) => {
   // const {idForm} = useParams()
   // If there is no identifier on url
   let idForm = "";
-  console.log(location.state);
   if (location.state) {
     idForm = location.state.idForm;
   } else {
@@ -33,7 +32,6 @@ const FormEdit = ({ setReload, reload }) => {
   }
 
   useEffect(() => {
-    // console.log("reload");
     if (idForm) {
       const getInfoForm = async () => {
         try {
@@ -44,7 +42,6 @@ const FormEdit = ({ setReload, reload }) => {
           if (response.data) {
             setTitle(response.data.title);
             setQuestions(response.data.questions);
-            // setForm(response.data);
             setIsLoading(false);
           }
         } catch (error) {
@@ -74,7 +71,6 @@ const FormEdit = ({ setReload, reload }) => {
           { title: title }
         );
         if (response.data) {
-          // console.log(response.data);
           setReload(!reload);
           setSuccessMessage("Modification enregistrée !");
         }
@@ -103,7 +99,6 @@ const FormEdit = ({ setReload, reload }) => {
         `https://tell-me-more-server.herokuapp.com/form/delete/${idForm}`
       );
       if (response.data) {
-        console.log(response.data);
         setSuccessMessage("Le formulaire a bien été supprimé avec succès !");
         // Success : Open modal success , and then redirection to Home
         setModal(true);
@@ -136,12 +131,7 @@ const FormEdit = ({ setReload, reload }) => {
           {/* Edit title form */}
           <div className="inputTitleForm">
             <form onSubmit={handleChangeTitleForm}>
-              <input
-                type="text"
-                onChange={handleTitle}
-                value={title}
-                // placeholder={title}
-              />
+              <input type="text" onChange={handleTitle} value={title} />
               {/* Button to Validate */}
               {displayCheck && (
                 <button type="submit" className="btn-none check">

@@ -12,7 +12,6 @@ const Forms = ({ forms, setForms, reload, setReload }) => {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    console.log("reload");
     const allForms = async () => {
       try {
         const response = await axios.get(
@@ -21,7 +20,6 @@ const Forms = ({ forms, setForms, reload, setReload }) => {
 
         if (response.data) {
           setForms(response.data);
-          console.log(response.data);
           setIsLoading(false);
         }
       } catch (error) {
@@ -43,7 +41,9 @@ const Forms = ({ forms, setForms, reload, setReload }) => {
           <FormCard empty={true} setModal={setModal} modal={modal} />
           {/* My forms */}
           {forms.map((form, index) => {
-            return <FormCard title={form.title} idForm={form._id} />;
+            return (
+              <FormCard title={form.title} idForm={form._id} key={index} />
+            );
           })}
         </div>
       </div>
