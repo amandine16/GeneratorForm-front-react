@@ -1,6 +1,6 @@
 import GoBack from "../components/GoBack";
 import { useParams, useHistory } from "react-router-dom";
-import { useState, useEffect } from "react/cjs/react.development";
+import { useState, useEffect } from "react";
 import { ReactComponent as ArrowLeft } from "../assets/icons/feather/arrow-left.svg";
 import axios from "axios";
 import ButtonValid from "../components/buttonValid";
