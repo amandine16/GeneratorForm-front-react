@@ -17,7 +17,6 @@ const Forms = ({ forms, setForms, reload, setReload }) => {
         );
 
         if (response.data) {
-          console.log(response.data);
           setForms(response.data);
           setIsLoading(false);
         }

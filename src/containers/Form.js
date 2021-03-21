@@ -30,7 +30,6 @@ const Form = () => {
         );
         if (response.data) {
           setData(response.data);
-          console.log(response.data.questions);
         }
         if (response2.data) {
           setAnswers(response2.data[0].questionsAndAnswers);
@@ -57,14 +56,12 @@ const Form = () => {
     // if state questionAnswer is no empty, is that i want to answer the questions
     if (questionsAnswer.length !== 0) {
       // Add all question (in table form)
-      console.log(data.questions);
       let newQuestionsAnswer = [...data.questions];
       // add answer in array answer of this question
       newQuestionsAnswer[page - 1].answer.push(questionsAnswer);
 
       // Add all question (in table answer)
       let newAnswers = [...answers];
-      console.log(newAnswers);
       if (answers.length === 0) {
         // Add all question
         newAnswers = [...data.questions];
