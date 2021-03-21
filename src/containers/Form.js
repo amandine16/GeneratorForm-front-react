@@ -56,7 +56,7 @@ const Form = () => {
     if (questionsAnswer.length !== 0) {
       // Add all question (in table form)
       console.log(data.questions);
-      let newQuestionsAnswer = { ...data.questions };
+      let newQuestionsAnswer = [...data.questions];
       // add answer in array answer of this question
       newQuestionsAnswer[page - 1].answer.push(questionsAnswer);
 
