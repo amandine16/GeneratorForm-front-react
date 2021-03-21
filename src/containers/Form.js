@@ -1,5 +1,5 @@
 import GoBack from "../components/GoBack";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react/cjs/react.development";
 import { ReactComponent as ArrowLeft } from "../assets/icons/feather/arrow-left.svg";
 import axios from "axios";
@@ -14,8 +14,8 @@ const Form = () => {
   const [answers, setAnswers] = useState();
   const [idAnswer, setIdAnswer] = useState();
   const [noteSelected, setNoteSelected] = useState(null);
-  console.log(page);
-
+  const history = useHistory();
+  // Array for select note
   let tabNote = [1, 2, 3, 4, 5];
 
   // get all info on form , and info of answer
@@ -45,6 +45,8 @@ const Form = () => {
   }, [id]);
 
   const start = () => {
+    // State for note selected reset to zero
+    setNoteSelected(null);
     // if start quizz for the first time, i go the first question
     if (page < data.questions.length) {
       let newPage = page + 1;
@@ -66,8 +68,6 @@ const Form = () => {
         newAnswers = [...data.questions];
         // si j'enlève l'ajout des réponses dans le formulaire, je remettrai cette ligne ci-dessous
         // newAnswers[page - 1].answer.push(questionsAnswer);
-        console.log(answers.length);
-        console.log(data.questions.length);
       } else if (answers.length < data.questions.length) {
         newAnswers = [...data.questions];
       } else {
@@ -126,7 +126,7 @@ const Form = () => {
   return isLoading ? (
     <span>En attente ...</span>
   ) : (
-    <div className="form">
+    <div className="form container">
       {page === 0 ? (
         <>
           <div className="back">
@@ -137,7 +137,7 @@ const Form = () => {
               <div>SONDAGE</div>
               <div>{data.title}</div>
               <div>{data.questions.length} questions</div>
-              <div className="buttonSave" onClick={start}>
+              <div onClick={start}>
                 <ButtonValid text={"Commencer"} />
               </div>
             </div>
@@ -145,7 +145,17 @@ const Form = () => {
         </>
       ) : (
         <div className="content-question">
-          {page > data.questions.length && <span>Terminer</span>}
+          {page > data.questions.length && (
+            <div className="center">
+              <span>Merci d'avoir répondu à ce formulaire</span>
+              <div onClick={() => history.push("/")}>
+                <ButtonValid
+                  text={"Accéder à mes formulaire"}
+                  width={"300px"}
+                />
+              </div>
+            </div>
+          )}
           {data.questions.map((elem, index) => {
             return (
               <>

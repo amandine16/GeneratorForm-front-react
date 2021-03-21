@@ -34,7 +34,6 @@ const ContentEdit = ({
         });
       }
     }
-    console.log(tab);
   }
   // Array for answer note
   let tabNote = [1, 2, 3, 4, 5];
@@ -78,7 +77,6 @@ const ContentEdit = ({
   const saveQst = async () => {
     if (questions.length !== 0) {
       try {
-        console.log(questions);
         const response = await axios.post(
           `https://tell-me-more-server.herokuapp.com/form/update/${idForm}`,
           { questions: questions }
@@ -101,7 +99,6 @@ const ContentEdit = ({
     const newQuestions = [...questions];
     newQuestions.splice(index, 1);
     setQuestions(newQuestions);
-    console.log(newQuestions);
     try {
       const response = await axios.post(
         `https://tell-me-more-server.herokuapp.com/form/update/${idForm}`,

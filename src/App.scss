@@ -30,6 +30,20 @@ h1 {
   margin: 0 auto;
   padding: 0 20px;
 }
+.center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  span {
+    margin-bottom: 30px;
+    font-size: 36px;
+    color: $greenDark;
+    font-weight: 700;
+    font-family: "Averta";
+  }
+}
 
 .errorContainer {
   height: 20px;
@@ -136,8 +150,8 @@ h1 {
   cursor: pointer;
   background-color: $greenNormal;
   color: white;
-  width: 140px;
-  height: 50px;
+  // width: 140px;
+  // height: 50px;
   border-radius: 5px;
   padding: 15px;
   display: flex;
@@ -318,6 +332,8 @@ h1 {
   align-items: center;
   justify-content: space-between;
   .inputTitleForm {
+    width: 60%;
+    margin: 0 20px;
     form {
       display: flex;
       align-items: center;
@@ -327,6 +343,7 @@ h1 {
         font-weight: 700;
       }
       input {
+        width: 100%;
         font-family: "Averta";
         font-size: 24px;
         text-align: center;
@@ -457,9 +474,7 @@ h1 {
     margin: 50px 0;
   }
 }
-.form {
-  margin: 20px;
-}
+
 .back {
   margin-top: 10px;
 }
@@ -617,4 +632,19 @@ h1 {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+}
+.btn-finish {
+  font-family: "Averta";
+  cursor: pointer;
+  background-color: #62c188;
+  color: white;
+  width: 300px;
+  height: 50px;
+  border-radius: 5px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
 }

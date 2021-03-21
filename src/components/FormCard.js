@@ -2,11 +2,20 @@
 import { ReactComponent as Plus } from "../assets/icons/feather/plus.svg";
 import ButtonAnswer from "../components/ButtonAnswer";
 import ButtonEdit from "../components/ButtonEdit";
-
-const FormCard = ({ title, empty, setModal, modal, idForm }) => {
+import { useHistory } from "react-router-dom";
+const FormCard = ({ title, empty, setModal, modal, idForm, form }) => {
+  const history = useHistory();
   const openModal = () => {
     // open modal
     setModal(true);
+  };
+
+  const answer = () => {
+    form.questions.length !== 0
+      ? history.push(`/forms/${idForm}`)
+      : history.push(`/forms/${idForm}/edit`, {
+          idForm,
+        });
   };
 
   return (
@@ -26,7 +35,7 @@ const FormCard = ({ title, empty, setModal, modal, idForm }) => {
             <div>
               <ButtonEdit idForm={idForm} />
             </div>
-            <div>
+            <div onClick={answer}>
               <ButtonAnswer idForm={idForm} />
             </div>
           </div>

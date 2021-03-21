@@ -8,7 +8,8 @@ const ModalAddForm = ({ setModal, setForms, reload, setReload }) => {
   const [title, setTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const history = useHistory();
-  //   Function for value title
+
+  //   Function for change value title
   const handleTitle = (e) => {
     setTitle(e.target.value);
     setErrorMessage("");
@@ -31,12 +32,14 @@ const ModalAddForm = ({ setModal, setForms, reload, setReload }) => {
           });
         }
 
-        // Création d'un tableau qstAndArep à vide à la création du formulaire, dans la table Answer
+        // Create array empty for questionsAndAnswers in table Answer
         const response2 = await axios.post(
           `https://tell-me-more-server.herokuapp.com/answer/create`,
-          // `http://localhost:3001/answer/create`,
           { idForm: response.data._id, questionsAndAnswers: [] }
         );
+        if (response2) {
+          // Success
+        }
       } catch (error) {
         console.log(error.response.data);
         if (

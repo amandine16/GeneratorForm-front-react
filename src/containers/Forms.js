@@ -19,6 +19,7 @@ const Forms = ({ forms, setForms, reload, setReload }) => {
         );
 
         if (response.data) {
+          console.log(response.data);
           setForms(response.data);
           setIsLoading(false);
         }
@@ -42,7 +43,12 @@ const Forms = ({ forms, setForms, reload, setReload }) => {
           {/* My forms */}
           {forms.map((form, index) => {
             return (
-              <FormCard title={form.title} idForm={form._id} key={index} />
+              <FormCard
+                title={form.title}
+                idForm={form._id}
+                key={index}
+                form={form}
+              />
             );
           })}
         </div>

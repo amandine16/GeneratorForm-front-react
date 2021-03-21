@@ -23,7 +23,7 @@ const FormEdit = ({ setReload, reload }) => {
   //   recovery of id form
   const location = useLocation();
   const history = useHistory();
-  // const {idForm} = useParams()
+
   // If there is no identifier on url
   let idForm = "";
   if (location.state) {
@@ -56,7 +56,7 @@ const FormEdit = ({ setReload, reload }) => {
     } else {
       history.push("/");
     }
-  }, [setForm, idForm]);
+  }, [setForm, idForm, history]);
 
   //   Function for value title
   const handleTitle = (e) => {
@@ -89,7 +89,7 @@ const FormEdit = ({ setReload, reload }) => {
         if (
           error.response.data.message === "This form's title is already exist"
         ) {
-          setErrorMessage("Ce formulaire existe déjà");
+          setErrorMessage("Ce nom de formulaire existe déjà");
         }
       }
     };

@@ -12,11 +12,10 @@ const ModalSuccess = ({ successMessage, setSuccessMessage, setModal }) => {
             onClick={() => {
               setModal(false);
               setSuccessMessage("");
-              {
-                successMessage ===
-                  "Le formulaire a bien été supprimé avec succès !" &&
-                  history.push("/");
-              }
+
+              successMessage ===
+                "Le formulaire a bien été supprimé avec succès !" &&
+                history.push("/");
             }}
           />
         </div>
