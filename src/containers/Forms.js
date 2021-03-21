@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-// import pour créer des liens vers d'autres pages du site
-// import { Link } from "react-router-dom";
 import axios from "axios";
 // Components
 import FormCard from "../components/FormCard";

@@ -8,7 +8,6 @@ import ButtonValid from "../components/buttonValid";
 const Form = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
-  console.log(data);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [questionsAnswer, setQuestionsAnswer] = useState([]);
@@ -84,9 +83,6 @@ const Form = () => {
             `https://tell-me-more-server.herokuapp.com/form/update/${id}`,
             { questions: newQuestionsAnswer }
           );
-          // if (response.data) {
-          //   // setSuccessMessage("Vos réponses ont bien été sauvegardées !");
-          // }
           // Add question and answer in Answer
           const response2 = await axios.post(
             `https://tell-me-more-server.herokuapp.com/answer/update/${idAnswer}`,
@@ -98,7 +94,6 @@ const Form = () => {
           }
         } catch (error) {
           console.log(error);
-          // setErrorMessage("Erreur, veuillez réessayer");
         }
       };
       saveQstAnswer();
