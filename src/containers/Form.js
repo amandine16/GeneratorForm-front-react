@@ -32,11 +32,13 @@ const Form = () => {
         if (response.data) {
           setData(response.data);
           console.log(response.data.questions);
-          setIsLoading(false);
         }
         if (response2.data) {
           setAnswers(response2.data[0].questionsAndAnswers);
           setIdAnswer(response2.data[0]._id);
+        }
+        if (response2.data && response.data) {
+          setIsLoading(false);
         }
       } catch (error) {
         console.log(error.response);
