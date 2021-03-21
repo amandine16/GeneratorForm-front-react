@@ -81,9 +81,9 @@ const Form = () => {
             `https://tell-me-more-server.herokuapp.com/form/update/${id}`,
             { questions: newQuestionsAnswer }
           );
-          if (response.data) {
-            // setSuccessMessage("Vos réponses ont bien été sauvegardées !");
-          }
+          // if (response.data) {
+          //   // setSuccessMessage("Vos réponses ont bien été sauvegardées !");
+          // }
           // Add question and answer in Answer
           const response2 = await axios.post(
             `https://tell-me-more-server.herokuapp.com/answer/update/${idAnswer}`,
@@ -206,11 +206,9 @@ const Form = () => {
                         <ArrowLeft />
                         Précedent
                       </button>
-                      {/* {page !== data.questions.length && ( */}
                       <button className="next" onClick={start}>
                         Suivant
                       </button>
-                      {/* )} */}
                     </div>
                   </div>
                 )}
