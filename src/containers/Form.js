@@ -13,6 +13,7 @@ const Form = () => {
   const [questionsAnswer, setQuestionsAnswer] = useState([]);
   const [answers, setAnswers] = useState();
   const [idAnswer, setIdAnswer] = useState();
+  const [noteSelected, setNoteSelected] = useState(null);
   console.log(page);
 
   let tabNote = [1, 2, 3, 4, 5];
@@ -119,6 +120,7 @@ const Form = () => {
   };
   const noteAnswer = (note, type, numQst) => {
     setQuestionsAnswer(note);
+    setNoteSelected(note);
   };
 
   return isLoading ? (
@@ -146,9 +148,9 @@ const Form = () => {
           {page > data.questions.length && <span>Terminer</span>}
           {data.questions.map((elem, index) => {
             return (
-              <div key={index} className="centerAnswer">
+              <>
                 {page === index + 1 && (
-                  <>
+                  <div key={index} className="centerAnswer">
                     <div className="content">
                       <div className="numQst">QUESTION {index + 1}</div>
                       <div className="title">{elem.question}</div>
@@ -176,6 +178,8 @@ const Form = () => {
                                     borderTopRightRadius: elem === 5 && "15px",
                                     borderBottomRightRadius:
                                       elem === 5 && "15px",
+                                    backgroundColor:
+                                      noteSelected === elem && "#f09f97",
                                   }}
                                 >
                                   {elem}
@@ -198,9 +202,9 @@ const Form = () => {
                       </button>
                       {/* )} */}
                     </div>
-                  </>
+                  </div>
                 )}
-              </div>
+              </>
             );
           })}
         </div>

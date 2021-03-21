@@ -78,6 +78,7 @@ const ContentEdit = ({
   const saveQst = async () => {
     if (questions.length !== 0) {
       try {
+        console.log(questions);
         const response = await axios.post(
           `https://tell-me-more-server.herokuapp.com/form/update/${idForm}`,
           { questions: questions }
@@ -96,11 +97,25 @@ const ContentEdit = ({
     }
   };
 
-  const trashQst = (index) => {
+  const trashQst = async (index) => {
     const newQuestions = [...questions];
     newQuestions.splice(index, 1);
     setQuestions(newQuestions);
+    console.log(newQuestions);
+    try {
+      const response = await axios.post(
+        `https://tell-me-more-server.herokuapp.com/form/update/${idForm}`,
+        { questions: newQuestions }
+      );
+      if (response.data) {
+        setSuccessMessage("La question a bien été supprimée !");
+      }
+    } catch (error) {
+      console.log(error.response.data);
+      setErrorMessage("Erreur, veuillez réessayer");
+    }
   };
+
   // modify order question +
   const upOrder = (index) => {
     if (index > 0) {
