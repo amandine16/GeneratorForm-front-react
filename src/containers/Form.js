@@ -5,7 +5,7 @@ import { ReactComponent as ArrowLeft } from "../assets/icons/feather/arrow-left.
 import axios from "axios";
 import ButtonValid from "../components/buttonValid";
 
-export default function Form() {
+const Form = () => {
   const { id } = useParams();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -219,4 +219,6 @@ export default function Form() {
       )}
     </div>
   );
-}
+};
+
+export default Form;
