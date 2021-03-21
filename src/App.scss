@@ -454,6 +454,7 @@ h1 {
     color: $greenDark;
     font-weight: 700;
     font-style: italic;
+    margin: 50px 0;
   }
 }
 .form {
@@ -545,7 +546,11 @@ h1 {
   display: flex;
   .note {
     border: 1px solid $greenFonce;
-    padding: 25px;
+    padding: 25px 33px;
+    &:hover {
+      background-color: $pinkClair;
+      cursor: pointer;
+    }
   }
 }
 .next,
@@ -579,15 +584,37 @@ h1 {
   margin-bottom: 30px;
 }
 .rep {
-  margin-left: 100px;
+  font-size: 16px;
+  margin-left: 105px;
   text-align: justify;
+  margin: 15px 0 15px 105px;
 }
 .oneAnswer {
   margin: 25px 0;
 }
-.listeNote {
-  margin-bottom: 30px;
-}
+// .listeNote {
+//   margin-bottom: 30px;
+//   font-size: 24px;
+// }
+
 .answer {
   margin-top: 30px;
+}
+.ContentEdit {
+  .listeNote {
+    margin: 15px 0 15px 105px;
+    margin-bottom: 30px;
+    font-size: 24px;
+  }
+  .noteQst {
+    height: 37px;
+  }
+  .textQst {
+    height: 37px;
+  }
+}
+.centerAnswer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }

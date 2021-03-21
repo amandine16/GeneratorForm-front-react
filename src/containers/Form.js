@@ -146,7 +146,7 @@ const Form = () => {
           {page > data.questions.length && <span>Terminer</span>}
           {data.questions.map((elem, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="centerAnswer">
                 {page === index + 1 && (
                   <>
                     <div className="content">

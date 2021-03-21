@@ -20,7 +20,6 @@ const FormEdit = ({ setReload, reload }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const [displayCheck, setDisplayCheck] = useState(false);
   const [answers, setAnswers] = useState();
-  console.log(answers);
   //   recovery of id form
   const location = useLocation();
   const history = useHistory();

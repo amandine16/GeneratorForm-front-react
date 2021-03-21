@@ -18,8 +18,9 @@ const ContentEdit = ({
 }) => {
   const [switchEdit, setSwitchEdit] = useState(true);
   const [question, setQuestion] = useState("");
+
+  // Loop for to condition display of answer
   let tab = [];
-  console.log(answers);
   if (answers.questionsAndAnswers.length !== 0) {
     for (let i = 0; i < answers.questionsAndAnswers[0].answer.length; i++) {
       for (let y = 0; y < answers.questionsAndAnswers.length; y++) {
@@ -35,7 +36,9 @@ const ContentEdit = ({
     }
     console.log(tab);
   }
+  // Array for answer note
   let tabNote = [1, 2, 3, 4, 5];
+
   // Function to switch from question to answer
   const switchEdition = (type) => {
     type === "answer" ? setSwitchEdit(false) : setSwitchEdit(true);
@@ -73,17 +76,23 @@ const ContentEdit = ({
   };
 
   const saveQst = async () => {
-    try {
-      const response = await axios.post(
-        `https://tell-me-more-server.herokuapp.com/form/update/${idForm}`,
-        { questions: questions }
-      );
-      if (response.data) {
-        setSuccessMessage("Vos questions ont bien été sauvegardées !");
+    if (questions.length !== 0) {
+      try {
+        const response = await axios.post(
+          `https://tell-me-more-server.herokuapp.com/form/update/${idForm}`,
+          { questions: questions }
+        );
+        if (response.data) {
+          setSuccessMessage("Vos questions ont bien été sauvegardées !");
+        }
+      } catch (error) {
+        console.log(error.response.data);
+        setErrorMessage("Erreur, veuillez réessayer");
       }
-    } catch (error) {
-      console.log(error.response.data);
-      setErrorMessage("Erreur, veuillez réessayer");
+    } else {
+      setErrorMessage(
+        "Vous devez d'abord entrez une première question avant de sauvegarder !"
+      );
     }
   };
 
@@ -121,7 +130,10 @@ const ContentEdit = ({
   };
 
   return (
-    <div className="ContentEdit">
+    <div
+      className="ContentEdit"
+      style={{ justifyContent: !switchEdit && "flex-start" }}
+    >
       {/* Top */}
       <div className="top">
         <div
@@ -141,7 +153,7 @@ const ContentEdit = ({
           Réponses
         </div>
       </div>
-      {/* Content according to */}
+      {/* QUESTION AND EDIT QUESTION */}
       {switchEdit ? (
         <div className="formEditQst">
           {questions.length !== 0 ? (
@@ -186,10 +198,10 @@ const ContentEdit = ({
               );
             })
           ) : (
-            <span className="noQuestion">
+            <div className="noQuestion">
               Aucune question associées à ce formulaire, cliquez sur ajouter une
               question texte ou note !
-            </span>
+            </div>
           )}
           {/* Button Type new Question */}
           <div className="btnTypeNewQst">
@@ -200,64 +212,78 @@ const ContentEdit = ({
               <TypeQuestion type={"Note"} />
             </div>
           </div>
-          {/* Btn save */}
-          <div className="btnSave" onClick={saveQst}>
-            <ButtonValid text={"Sauvegarder"} />
-          </div>
         </div>
-      ) : (
+      ) : // ANSWER
+      tab.length !== 0 ? (
         <div className="answer">
           {tab.map((elem, index) => {
             return (
-              <div
-                key={index}
-                className="oneAnswer"
-                style={{ borderBottom: elem.last && "1px solid #62c188" }}
-              >
-                {console.log(elem)}
+              elem.rep !== undefined && (
                 <div
-                  className="logoTypeQst"
+                  key={index}
+                  className="oneAnswer"
                   style={{
-                    display: "flex",
-
-                    justifyContent: "flex-start",
+                    borderBottom: elem.last && "1px solid #62c188",
+                    paddingBottom: elem.last && "30px",
                   }}
                 >
-                  {elem.type === "text" ? (
-                    <TextQst rank={elem.rank} />
-                  ) : (
-                    <NoteQst rank={elem.rank} />
-                  )}
-                  <p className="titleQuestion">{elem.q}</p>
-                </div>
-
-                {elem.type === "text" ? (
-                  <p className="rep">{elem.rep}</p>
-                ) : (
-                  <div className="listeNote">
-                    {tabNote.map((num, i) => {
-                      return (
-                        <div
-                          key={i}
-                          className="note"
-                          style={{
-                            backgroundColor:
-                              num === Number(elem.rep) && "#f09f97",
-                            borderTopLeftRadius: num === 1 && "15px",
-                            borderBottomLeftRadius: num === 1 && "15px",
-                            borderTopRightRadius: num === 5 && "15px",
-                            borderBottomRightRadius: num === 5 && "15px",
-                          }}
-                        >
-                          {num}
-                        </div>
-                      );
-                    })}
+                  {/* icon text or note for question */}
+                  <div
+                    className="logoTypeQst"
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    {elem.type === "text" ? (
+                      <TextQst rank={elem.rank} />
+                    ) : (
+                      <NoteQst rank={elem.rank} />
+                    )}
+                    <p className="titleQuestion">{elem.q}</p>
                   </div>
-                )}
-              </div>
+
+                  {elem.type === "text" ? (
+                    <p className="rep">{elem.rep !== undefined && elem.rep}</p>
+                  ) : (
+                    <div className="listeNote">
+                      {tabNote.map((num, i) => {
+                        return (
+                          <div
+                            key={i}
+                            className="note"
+                            style={{
+                              backgroundColor:
+                                num === Number(elem.rep) && "#f09f97",
+                              borderTopLeftRadius: num === 1 && "10px",
+                              borderBottomLeftRadius: num === 1 && "10px",
+                              borderTopRightRadius: num === 5 && "10px",
+                              borderBottomRightRadius: num === 5 && "10px",
+                            }}
+                          >
+                            {num}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )
             );
           })}
+        </div>
+      ) : (
+        <div className="answer" style={{ margin: "auto" }}>
+          <div className="noQuestion">
+            Aucune réponses associées à ce formulaire, cliquez sur répondre pour
+            commencer le quiz !
+          </div>
+        </div>
+      )}
+      {switchEdit && (
+        /* Btn save */
+        <div className="btnSave" onClick={saveQst}>
+          <ButtonValid text={"Sauvegarder"} />
         </div>
       )}
     </div>
