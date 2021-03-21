@@ -7,7 +7,7 @@ import ButtonValid from "../components/buttonValid";
 
 const Form = () => {
   const { id } = useParams();
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [questionsAnswer, setQuestionsAnswer] = useState([]);
