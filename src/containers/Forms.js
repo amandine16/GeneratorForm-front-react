@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 // Components
 import FormCard from "../components/FormCard";
+import Loader from "react-loader-spinner";
 // Modal
 import ModalAddForm from "../components/ModalAddForm";
 
@@ -28,7 +29,9 @@ const Forms = ({ forms, setForms, reload, setReload }) => {
   }, [setForms, reload]);
 
   return isLoading ? (
-    <span>En attente</span>
+    <div className="loader">
+      <Loader type="BallTriangle" color="#35764b" height={90} width={90} />
+    </div>
   ) : (
     <div className="Forms">
       <div className="container">

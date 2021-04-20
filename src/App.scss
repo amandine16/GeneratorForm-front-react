@@ -59,6 +59,12 @@ h1 {
   background-color: transparent;
   outline: none;
 }
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 // COMPONENT
 .header {
   padding: 30px 0;
